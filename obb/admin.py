@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models.models import TrainStation, Train, TrainSection, Person, ICE, Railjets, Platform
+from .models import TrainStation, Train, TrainSection, Person, ICE, Railjets, Platform
 
 
 class TrainStationAdmin(admin.ModelAdmin):

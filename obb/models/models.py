@@ -1,3 +1,4 @@
+"""
 from django.db import models
 
 
@@ -119,3 +120,4 @@ class TrainStation(models.Model):
 
     def add_platform(self, platform):
         self.platform.add(platform)
+"""
