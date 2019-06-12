@@ -1,5 +1,7 @@
 from django.db import models
 from .train import Train
+from .ice import ICE
+from .railjets import Railjets
 
 
 class Platform(models.Model):
@@ -25,7 +27,7 @@ class Platform(models.Model):
         return self._train
 
     def accept_train(self, train):
-        if type(train) is Train:
+        if type(train) is Train or type(train) is ICE or type(train) is Railjets:
             self._train = train
             self.save()
         else:

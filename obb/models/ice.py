@@ -6,6 +6,8 @@ class ICE(Train, models.Model):
     _name = models.CharField(max_length=100)
     _dock_train = models.ManyToManyField('self', related_name='dependent_on', blank=True)
 
+    class Meta:
+        verbose_name_plural = 'ICEs'
     def __str__(self):
         return self._name
 

@@ -1,4 +1,8 @@
-from obb.models import TrainStation, Platform, ICE, TrainSection, Person
+from obb.models.train_station import TrainStation
+from obb.models.platform import Platform
+from obb.models.ice import ICE
+from obb.models.train_section import TrainSection
+from obb.models.person import Person
 
 # Create a train station
 platform = Platform(name='platform 1')
