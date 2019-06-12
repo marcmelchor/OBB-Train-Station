@@ -18,8 +18,8 @@ class Train(models.Model):
     def dock_section(self, train_section):
         if type(train_section) is TrainSection:
             self._train_section.add(train_section)
-            TrainSection.order = self._train_section.all().count() - 1
-            TrainSection.save()
+            train_section.order = self._train_section.all().count() - 1
+            train_section.save()
         else:
             print('Wrong type')
 
