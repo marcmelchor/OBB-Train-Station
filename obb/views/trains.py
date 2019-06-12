@@ -14,7 +14,7 @@ class TrainViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    # Create a Person, in Comment type "" (USE QUOTES)
+    # Create a Train, in Comment type "" (USE QUOTES)
     def create(self, request):
         train = Train()
         train.save()
@@ -41,7 +41,7 @@ class TrainViewSet(viewsets.ViewSet):
         train_section_2.get_on_train(person_2)
         train_section_3.get_on_train(person_3)
 
-        return Response(train)
+        return Response(TrainSerializer(train).data)
 
     def retrieve(self, request, pk=None):
         queryset = Train.objects.all()

@@ -27,22 +27,6 @@ class TrainSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'train_section')
 
 
-class ICESerializer(serializers.HyperlinkedModelSerializer):
-
-    dock_train = TrainSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = ICE
-        fields = ('id', 'name', 'dock_train')
-
-
-class RailjetsSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Railjets
-        fields = ('id', 'name')
-
-
 class PlatformSerializer(serializers.HyperlinkedModelSerializer):
 
     train = TrainSerializer(read_only=True)
@@ -59,3 +43,23 @@ class TrainStationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TrainStation
         fields = ('id', 'name', 'platform')
+
+
+class ICESerializer(serializers.HyperlinkedModelSerializer):
+
+    # dock_train = TrainSerializer(many=True, read_only=True)
+    train_section = TrainSectionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ICE
+        fields = ('id', 'name', 'train_section')
+
+
+class RailjetsSerializer(serializers.HyperlinkedModelSerializer):
+
+    train_section = TrainSectionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Railjets
+        fields = ('id', 'name', 'train_section')
+
