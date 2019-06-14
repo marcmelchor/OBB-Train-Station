@@ -24,6 +24,11 @@ class TrainStation(models.Model):
     def platform(self):
         return self._platform
 
+    @platform.setter
+    def platform(self, value):
+        if type(value) is Platform:
+            self._platform.add(value)
+
     def add_platform(self, platform):
         if type(platform) is Platform:
             self._platform.add(platform)

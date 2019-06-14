@@ -15,6 +15,13 @@ class Train(models.Model):
     def train_section(self):
         return self._train_section
 
+    @train_section.setter
+    def train_section(self, value):
+        if type(value) is TrainSection:
+            self._train_section.add(value)
+            value.order = self._train_section.all().count() - 1
+            value.save()
+
     def dock_section(self, train_section):
         if type(train_section) is TrainSection:
             self._train_section.add(train_section)

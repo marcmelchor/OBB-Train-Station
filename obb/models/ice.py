@@ -8,6 +8,7 @@ class ICE(Train, models.Model):
 
     class Meta:
         verbose_name_plural = 'ICEs'
+
     def __str__(self):
         return self._name
 
@@ -25,6 +26,11 @@ class ICE(Train, models.Model):
     @property
     def doc_train(self):
         return self._dock_train
+
+    @doc_train.setter
+    def doc_train(self, value):
+        if type(value) is ICE:
+            self._dock_train.add(value)
 
     def dock_train(self, ice):
         if type(ice) is ICE:

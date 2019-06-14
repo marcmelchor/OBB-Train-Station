@@ -1,9 +1,10 @@
 from obb.models import Train, TrainSection, Person
 from django.shortcuts import get_object_or_404
-from obb.serializers.serializers import TrainSerializer
+from obb.serializers import TrainSerializer, PeopleSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
+from itertools import chain
 
 
 class TrainViewSet(viewsets.ViewSet):
@@ -41,7 +42,9 @@ class TrainViewSet(viewsets.ViewSet):
         train_section_2.get_on_train(person_2)
         train_section_3.get_on_train(person_3)
 
-        return Response(TrainSerializer(train).data)
+        serializer = TrainSerializer(train)
+
+        return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         queryset = Train.objects.all()
@@ -62,12 +65,14 @@ class TrainViewSet(viewsets.ViewSet):
     @detail_route(methods=['get'], url_path='people')
     def people(self, request, pk=None):
         train = Train.objects.get(pk=pk)
-        # train.show_current_passengers()
-        people_list = []
         sections = train.train_section.all()
         for section in sections:
             for person in section.person.all():
                 print(person.first_name + ' ' + person.last_name)
-                people_list.append(person.first_name + ' ' + person.last_name)
+                print(person.id)
+                people_list = list(person,)
 
-        return Response(people_list)
+        print(people_list)
+        serializer = PeopleSerializer(people_list)
+
+        return Response(serializer.data)

@@ -6,7 +6,16 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('first_name', 'last_name')
+        fields = ('id', 'first_name', 'last_name')
+
+
+class PeopleSerializer(serializers.HyperlinkedModelSerializer):
+
+    people = PersonSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Person
+        fields = ('people',)
 
 
 class TrainSectionSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,7 +24,7 @@ class TrainSectionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = TrainSection
-        fields = ('name', 'order', 'person')
+        fields = ('id', 'name', 'order', 'person')
 
 
 class TrainSerializer(serializers.HyperlinkedModelSerializer):

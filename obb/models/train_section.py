@@ -18,11 +18,8 @@ class TrainSection(models.Model):
         return self._name
 
     @name.setter
-    def name(self, value):
-        if value is not None:
-            self._name = value[: 100]
-        else:
-            self._name = 'default'
+    def name(self, value='default'):
+        self._name = value[: 100]
 
     @property
     def order(self):
@@ -35,6 +32,11 @@ class TrainSection(models.Model):
     @property
     def person(self):
         return self._person
+
+    @person.setter
+    def person(self, value):
+        if type(value) is Person:
+            self._person.add(value)
 
     def get_on_train(self, person):
         if type(person) is Person:

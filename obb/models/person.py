@@ -19,19 +19,13 @@ class Person(models.Model):
         return self._first_name
 
     @first_name.setter
-    def first_name(self, value):
-        if value is not None:
-            self._first_name = value[: 100]
-        else:
-            self._first_name = 'default'
+    def first_name(self, value='default'):
+        self._first_name = value[: 100]
 
     @property
     def last_name(self):
         return self._last_name
 
     @last_name.setter
-    def last_name(self, value):
-        if value is not None:
-            self._last_name = value[: 100]
-        else:
-            self._last_name = 'default'
+    def last_name(self, value='default'):
+        self._last_name = value[: 100]

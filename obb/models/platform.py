@@ -20,11 +20,17 @@ class Platform(models.Model):
 
     @name.setter
     def name(self, value):
-        self._name = value
+        self._name = value[: 100]
 
     @property
     def train(self):
         return self._train
+
+    @train.setter
+    def train(self, value):
+        if type(value) is Train or type(value) is ICE or type(value) is Railjets:
+            self._train = value
+            self.save()
 
     def accept_train(self, train):
         if type(train) is Train or type(train) is ICE or type(train) is Railjets:
