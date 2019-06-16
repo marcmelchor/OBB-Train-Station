@@ -8,6 +8,9 @@ class Platform(models.Model):
     _name = models.CharField(max_length=100)
     _train = models.ForeignKey(Train, on_delete=models.CASCADE, blank=True, null=True)
 
+    class Meta:
+        unique_together = ('_train',)
+
     def __str__(self):
         return self._name
 

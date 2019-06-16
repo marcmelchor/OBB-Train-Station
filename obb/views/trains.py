@@ -1,6 +1,6 @@
 from obb.models import Train, TrainSection, Person
 from django.shortcuts import get_object_or_404
-from obb.serializers import TrainSerializer, PeopleSerializer
+from obb.serializers import TrainSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
@@ -54,25 +54,23 @@ class TrainViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     # Update Train name, in Comment type "name <Train_name>" (USE QUOTES)
-    """def update(self, request, pk=None):
+    def update(self, request, pk=None):
         data = request.data.split(' ')
         train = Train.objects.get(pk=pk)
         train.name = data[1]
         train.save()
 
-        return Response(TrainSerializer(train).data)"""
+        serializer = TrainSerializer(train)
+
+        return Response(serializer.data)
 
     @detail_route(methods=['get'], url_path='people')
     def people(self, request, pk=None):
         train = Train.objects.get(pk=pk)
+        people_list = []
         sections = train.train_section.all()
         for section in sections:
             for person in section.person.all():
-                print(person.first_name + ' ' + person.last_name)
-                print(person.id)
-                people_list = list(person,)
+                people_list.append({'id': person.id, "first_name": person.first_name, "last_name": person.last_name})
 
-        print(people_list)
-        serializer = PeopleSerializer(people_list)
-
-        return Response(serializer.data)
+        return Response(people_list)
