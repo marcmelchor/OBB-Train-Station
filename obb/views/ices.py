@@ -62,9 +62,8 @@ class ICEViewSet(viewsets.ViewSet):
 
     @detail_route(methods=['get'], url_path='people')
     def people(self, request, pk=None):
-        ice = ICE.objects.get(pk=pk)
         people_list = []
-        sections = ice.train_section.all()
+        sections = ICE.objects.get(pk=pk).train_section.all()
         for section in sections:
             for person in section.person.all():
                 people_list.append({'id': person.id, "first_name": person.first_name, "last_name": person.last_name})
