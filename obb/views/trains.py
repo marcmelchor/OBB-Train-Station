@@ -73,4 +73,6 @@ class TrainViewSet(viewsets.ViewSet):
             for person in section.person.all():
                 people_list.append({'id': person.id, "first_name": person.first_name, "last_name": person.last_name})
 
-        return Response(people_list)
+        person_dict = {'person': people_list}
+
+        return Response(person_dict)
