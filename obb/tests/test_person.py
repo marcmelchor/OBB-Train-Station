@@ -4,7 +4,7 @@ from obb.models import Person
 
 class PersonTestCase(TestCase):
     def setUp(self):
-        person = Person.objects.create(first_name='John', last_name='Doe')
+        Person.objects.create(first_name='John', last_name='Doe')
 
     def test_getter_id(self):
         person = Person.objects.get(pk=1)
